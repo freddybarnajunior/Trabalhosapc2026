@@ -1,0 +1,17 @@
+          INP         
+          STA LIMITE   
+          LDA ZERO     
+LOOP      STA COUNT     
+          OUT              
+          SUB LIMITE  
+          BRZ FIM    
+          LDA COUNT
+          ADD ONE     
+          BRA LOOP     
+          HLT   
+
+
+LIMITE    DAT
+COUNT     DAT
+ZERO      DAT 0
+ONE       DAT 1
