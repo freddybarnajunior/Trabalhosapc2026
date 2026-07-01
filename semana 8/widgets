@@ -1,0 +1,16 @@
+import tkinter as tk
+janela = tk.Tk()
+janela.title("Widgets")
+janela.geometry("320x280")
+tk.Label(janela, text="Nome:").pack(pady=4)
+entrada = tk.Entry(janela, width=25)
+entrada.pack()
+def saudar():
+    nome = entrada.get()
+    resultado.config(text=f"Olá, {nome}!")
+tk.Button(janela, text="Saudar", command=saudar).pack(pady=8)
+resultado = tk.Label(janela, text="", fg="blue")
+resultado.pack()
+var = tk.BooleanVar()
+tk.Checkbutton(janela, text="Lembrar nome", variable=var).pack(pady=4)
+janela.mainloop()
