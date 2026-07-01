@@ -15,8 +15,6 @@ janela = tk.Tk()
 janela.title("Minha Primeira Janela Interativa")
 janela.geometry("400x250")  # Aumentado levemente para acomodar os novos elementos
 
-# --- NOVOS ELEMENTOS (WIDGETS) ---
-
 # Rótulo de texto descritivo
 rotulo_instrucao = tk.Label(janela, text="Digite seu nome:", font=("Arial", 12))
 rotulo_instrucao.pack(pady=10)  # O pady adiciona um espaçamento vertical
