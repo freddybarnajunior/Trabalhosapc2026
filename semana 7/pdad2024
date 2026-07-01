@@ -1,0 +1,49 @@
+# Exercícios de Programação com Microdados do PDAD 2024 — Distrito Federal
+
+Este repositório contém uma série de exercícios práticos de programação voltados para a disciplina de Algoritmos e Programação de Computadores, utilizando os microdados reais da Pesquisa Distrital por Amostra de Domicílios Ampliada (PDAD-A) de 2024, realizada pelo IPEDF (Instituto de Pesquisa e Estatística do Distrito Federal).
+
+O objetivo deste material é desenvolver competências em análise de dados quantitativos, manipulação de arquivos (CSV e Excel) e implementação de algoritmos fundamentais de ordenação e busca, sem a dependência de bibliotecas de alto nível como o Pandas.
+
+---
+
+## Estrutura do Conteúdo
+
+O roteiro de atividades está dividido de forma progressiva em três partes principais:
+
+### Parte 1 — Entendendo os dados antes de programar
+Uma introdução teórica e de contextualização sobre o PDAD-A 2024, abrangendo a inclusão de áreas rurais e municípios da Periferia Metropolitana de Brasília (PMB). Esta seção orienta o estudante a inspecionar os arquivos de dados e o dicionário de variáveis para compreender a modelagem dos registros.
+
+### Parte 2 — Algoritmos Básicos e Análise Estatística Manual
+Exercícios práticos para manipular dados diretamente via código puro, cobrindo:
+* Leitura e filtragem de arquivos nos formatos CSV e XLSX.
+* Cálculo manual de estatísticas descritivas (média aritmética, contagem de frequência com dicionários e buscas lineares).
+* Tratamento de valores especiais e códigos de omissão de dados explicitados no dicionário de variáveis.
+
+### Parte 3 — Ordenação de Estruturas Complexas e Projeto Final
+Aplicação prática de conceitos de complexidade computacional através da ordenação de registros compostos (estruturas/moradores):
+* Implementação e comparação de eficiência dos algoritmos Bubble Sort, Selection Sort e Insertion Sort.
+* Criação de uma ferramenta de linha de comando (`analise_ra.py`) que aceita argumentos via terminal para gerar relatórios socioeconômicos automáticos por Região Administrativa (RA), exportando os resultados formatados para arquivos de texto.
+
+---
+
+## Requisitos de Arquivos
+
+Para a correta execução dos exercícios propostos, certifique-se de possuir os seguintes arquivos no seu ambiente de trabalho:
+* `moradores_parcial.csv` — Amostra com os registros de dados individuais dos moradores.
+* `domicilios_parcial.xlsx` — Amostra contendo os dados estruturais e socioeconômicos das habitações.
+* `dicionario_de_variaveis_pdad_2024.xlsx` — Documento de referência com a codificação e significado de cada coluna.
+
+---
+
+## Como Utilizar Este Repositório
+
+1. **Estudo Prévio:** Leia atentamente a Parte 1 para compreender o significado das variáveis de interesse, como os códigos de Regiões Administrativas (RA) e os delimitadores de arquivos.
+2. **Resolução Progressiva:** Desenvolva os scripts em Python seguindo a numeração sugerida na tabela-resumo ao final do arquivo de exercícios, garantindo que a lógica de ordenação e busca seja feita de forma nativa (sem usar `.sort()` ou funções prontas de pacotes externos).
+3. **Uso do Script Principal:** Para testar a geração automática de relatórios desenvolvida na última etapa, utilize o terminal passando o código da RA desejada e o arquivo de destino:
+
+```bash
+# Apenas exibição em tela do relatório da RA 5320
+python analise_ra.py 5320
+
+# Exibição em tela e salvamento do relatório em arquivo de texto
+python analise_ra.py 5320 relatorio_gama.txt
