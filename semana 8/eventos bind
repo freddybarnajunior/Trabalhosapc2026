@@ -1,1 +1,58 @@
+import tkinter as tk
 
+# Função para atualizar o rótulo de coordenadas em tempo real (evita travar o log)
+def rastrear_mouse(event):
+    rotulo_coordenadas.config(text=f"Mouse na posição do widget: X={event.x} | Y={event.y}")
+
+# Função para registrar eventos importantes no bloco de texto
+def registrar_evento(msg):
+    log.config(state="normal")
+    log.insert(tk.END, msg + "\n")
+    log.config(state="disabled")
+    log.see(tk.END)  # Rola o scrollbar automaticamente para o final
+
+# Função para tratar os cliques do mouse
+def tratar_clique(event):
+    registrar_evento(f"Clique detectado em ({event.x}, {event.y})")
+
+# Função para tratar as teclas pressionadas
+def tratar_teclado(event):
+    registrar_evento(f"Tecla pressionada: {event.keysym}")
+
+# Função para limpar a caixa de log
+def limpar_log():
+    log.config(state="normal")
+    log.delete("1.0", tk.END)
+    log.config(state="disabled")
+    registrar_evento("Log limpo com sucesso.")
+
+# 1. Criação e configuração da janela raiz
+janela = tk.Tk()
+janela.title("Gerenciador de Eventos I/O")
+janela.geometry("400x320")
+
+# 2. Rótulo para coordenadas em tempo real (interação leve)
+rotulo_coordenadas = tk.Label(janela, text="Mova o mouse sobre a caixa de texto...", font=("Arial", 9, "italic"))
+rotulo_coordenadas.pack(pady=4)
+
+# 3. Widget de Texto (Log)
+log = tk.Text(janela, height=10, width=46, font=("Consolas", 10), state="disabled")
+log.pack(padx=10, pady=5)
+
+# 4. Botão de controle
+botao_limpar = tk.Button(janela, text="Limpar Histórico", command=limpar_log)
+botao_limpar.pack(pady=8)
+
+# 5. Vinculação de Eventos (Binds)
+# Movimento e cliques vinculados especificamente ao widget 'log'
+log.bind("<Motion>", rastrear_mouse)
+log.bind("<Button-1>", tratar_clique)
+
+# Captura de teclado vinculada à janela inteira
+janela.bind("<Key>", tratar_teclado)
+
+# Mensagem inicial do sistema
+registrar_evento("Sistema iniciado. Interaja com a interface...")
+
+# 6. Loop principal
+janela.mainloop()
