@@ -1,0 +1,29 @@
+# Interfaces Gráficas com Tkinter — Exemplos Didáticos
+
+Este repositório reúne uma sequência progressiva de exemplos didáticos desenvolvidos em Python utilizando a biblioteca Tkinter para a construção de interfaces gráficas de usuário (GUI). O material serve como suporte prático para a disciplina de Algoritmos e Programação de Computadores (APC).
+
+Cada script foi projetado de forma isolada e autocontida, permitindo ao estudante evoluir desde a inicialização de uma janela em branco até a integração avançada de plotagem gráfica em tempo real com Matplotlib.
+
+---
+
+## Estrutura dos Exemplos
+
+O repositório está organizado de forma cronológica e incremental:
+
+* **`01_janela_basica.py` (Fundamentos):** Demonstra o ciclo de vida mínimo de um aplicativo de interface gráfica: instanciação do objeto raiz (`tk.Tk()`), configuração de metadados de exibição (título, geometria de inicialização) e a abertura do laço de escuta contínua de eventos (`mainloop()`).
+* **`02_widgets.py` (Componentes básicos):** Introduz a declaração e o posicionamento de elementos fundamentais como `Label`, `Entry`, `Button` e `Checkbutton`. Aborda a captura de strings em tempo de execução e a atualização dinâmica de estados de componentes.
+* **`03_layout_grid.py` (Gerenciamento de Grade):** Explora o posicionamento matricial por meio do método `.grid()`. Ensina o alinhamento de componentes por pontos cardeais (`sticky`) e o processo de mesclagem de células (`columnspan`), ideal para formulários estruturados.
+* **`04_eventos_bind.py` (Interrupções e Assincronia):** Aborda o mapeamento de periféricos usando o método `.bind()`. Demonstra o tratamento dinâmico de eventos de ponteiro (cliques e coordenadas de movimento do mouse) e de pressionamento de teclas em um buffer de texto analítico.
+* **`05_dialogos.py` (Janelas Modais Externas):** Demonstra o uso de subclasses nativas de diálogo para interação do sistema operacional, abrangendo alertas (`messagebox`), seletores de caminhos de arquivos no disco (`filedialog`) e caixas flutuantes de input de texto (`simpledialog`).
+* **`06_grafico.py` (Integração Científica):** Acopla o ecossistema gráfico do Matplotlib dentro do loop de eventos do Tkinter através do backend `TkAgg`. Apresenta a alternância dinâmica de curvas matemáticas via `Radiobutton` e a renderização da barra nativa de ferramentas cartesianas (zoom e pan).
+
+---
+
+## Pré-requisitos e Ambiente
+
+O projeto requer um ambiente Python configurado na versão 3.8 ou superior. A biblioteca Tkinter faz parte da instalação padrão do interpretador na maioria dos sistemas operacionais.
+
+Para a execução completa de todos os módulos (especificamente o script de visualização científica `06_grafico.py`), instale as dependências numéricas e de plotagem executando o comando abaixo:
+
+```bash
+pip install matplotlib numpy
