@@ -1,16 +1,48 @@
 import tkinter as tk
-janela = tk.Tk()
-janela.title("Widgets")
-janela.geometry("320x280")
-tk.Label(janela, text="Nome:").pack(pady=4)
-entrada = tk.Entry(janela, width=25)
-entrada.pack()
+
+# Função para processar a saudação e verificar o Checkbutton
 def saudar():
-    nome = entrada.get()
-    resultado.config(text=f"Olá, {nome}!")
-tk.Button(janela, text="Saudar", command=saudar).pack(pady=8)
-resultado = tk.Label(janela, text="", fg="blue")
-resultado.pack()
-var = tk.BooleanVar()
-tk.Checkbutton(janela, text="Lembrar nome", variable=var).pack(pady=4)
+    nome = entrada.get().strip()
+    
+    # Validação simples para evitar campos vazios
+    if not nome:
+        resultado.config(text="Por favor, digite um nome!", fg="red")
+        return
+
+    # Exibe a saudação padrão
+    mensagem = f"Olá, {nome}!"
+    
+    # Verifica o estado da variável associada ao Checkbutton
+    if var_lembrar.get():
+        mensagem += " (Seu nome foi lembrado)"
+        resultado.config(text=mensagem, fg="green")
+    else:
+        resultado.config(text=mensagem, fg="blue")
+        entrada.delete(0, tk.END)  # Limpa o campo se não for para lembrar
+
+# 1. Cria e configura a janela principal
+janela = tk.Tk()
+janela.title("Controle de Widgets")
+janela.geometry("320x240")
+
+# 2. Elementos de Entrada (Nome)
+tk.Label(janela, text="Digite seu nome:", font=("Arial", 10)).pack(pady=6)
+entrada = tk.Entry(janela, width=25, font=("Arial", 10))
+entrada.pack(pady=2)
+
+# 3. Variável de Controle e Checkbutton
+# Alterado o nome da variável para ficar mais explícito
+var_lembrar = tk.BooleanVar()
+check = tk.Checkbutton(janela, text="Lembrar meu nome", variable=var_lembrar, font=("Arial", 9))
+check.pack(pady=6)
+
+# 4. Botão de Ação
+botao = tk.Button(janela, text="Saudar Usuário", command=saudar, font=("Arial", 10, "bold"))
+botao.pack(pady=8)
+
+# 5. Área de Resultado
+resultado = tk.Label(janela, text="", font=("Arial", 11, "bold"))
+resultado.pack(pady=10)
+
+# 6. Inicia o loop da aplicação
 janela.mainloop()
