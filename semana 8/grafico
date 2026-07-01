@@ -1,0 +1,77 @@
+import tkinter as tk
+import matplotlib
+matplotlib.use("TkAgg")  # Garante a integração correta com o Tkinter
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+import numpy as np
+
+# ── Funções de Geração de Dados sem Linhas Fantasmas ──────────────────
+def gerar_dados(tipo, freq):
+    x = np.linspace(-2 * np.pi, 2 * np.pi, 1000)
+    
+    if tipo == "seno":
+        return x, np.sin(freq * x), "steelblue"
+    elif tipo == "cosseno":
+        return x, np.cos(freq * x), "tomato"
+    elif tipo == "quadrática":
+        return x, (freq * x)**2 / 10, "darkorchid"
+    elif tipo == "tangente":
+        y = np.tan(freq * x)
+        # Mascara os pontos de quebra/infinito para evitar as linhas verticais conectando os extremos
+        limiar = 10.0
+        y[y > limiar] = np.nan
+        y[y < -limiar] = np.nan
+        return x, y, "seagreen"
+
+# ── Função de Redesenho do Gráfico ───────────────────────────────────
+def atualizar(event=None):
+    tipo = tipo_var.get()
+    frequencia = slider_freq.get()
+    
+    # Obtém os dados tratados baseados nos controles
+    x, y, cor = gerar_dados(tipo, frequencia)
+    
+    ax.clear()
+    ax.plot(x, y, color=cor, linewidth=2)
+    
+    # Customização do plano cartesiano
+    ax.set_title(f"Função {tipo.capitalize()} (Frequência: {frequencia}x)", fontdict={'fontsize': 12, 'weight': 'bold'})
+    ax.axhline(0, color="black", linewidth=0.8, alpha=0.5)
+    ax.axvline(0, color="black", linewidth=0.8, alpha=0.5)
+    ax.grid(True, alpha=0.3, linestyle="--")
+    
+    # Ajusta os limites do eixo Y fixos para a tangente não estourar o visual
+    if tipo == "tangente":
+        ax.set_ylim(-6, 6)
+    else:
+        ax.set_ylim(auto=True)
+        
+    fig.tight_layout()
+    canvas.draw()
+
+# ── Construção da Interface Tkinter ──────────────────────────────────
+janela = tk.Tk()
+janela.title("Painel de Visualização Gráfica Interativa")
+janela.geometry("650(600")
+janela.geometry("650x580")
+
+# 1. Contêiner de Controles Superior
+frame_ctrl = tk.Frame(janela, bg="#f5f5f5", bd=1, relief="groove", pady=6)
+frame_ctrl.pack(fill="x", padx=10, pady=5)
+
+# Seleção de Funções (Radiobuttons)
+tk.Label(frame_ctrl, text="Função:", bg="#f5f5f5", font=("Arial", 10, "bold")).pack(side="left", padx=10)
+
+tipo_var = tk.StringVar(value="seno")
+for nome in ["seno", "cosseno", "tangente", "quadrática"]:
+    tk.Radiobutton(
+        frame_ctrl, text=nome.capitalize(), variable=tipo_var,
+        value=nome, bg="#f5f5f5", font=("Arial", 9),
+        command=atualizar
+    ).pack(side="left", padx=5)
+
+# 2. Contêiner de Ajustes Secundários (Frequência)
+frame_ajustes = tk.Frame(janela, bg="#f5f5f5", bd=1, relief="groove", pady=6)
+frame_ajustes.pack(fill="x", padx=10, pady=5)
+
+tk.Label(frame_ajustes, text="Ajuste de Frequência / Multiplicador
