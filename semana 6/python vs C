@@ -1,0 +1,32 @@
+```markdown
+# Python — Cheatsheet Semântico (Espelho da Cheatsheet C)
+
+Este repositório contém um guia prático focado na transição conceitual e de modelo de memória entre as linguagens C e Python. O material foi desenvolvido especificamente para ser explorado e validado de forma visual por meio do Python Tutor, permitindo comparar diretamente como as duas linguagens gerenciam variáveis, escopos e estruturas de dados.
+
+O objetivo principal é mitigar confusões semânticas comuns, como a diferença entre variáveis que funcionam como caixas de memória físicas (em C) versus variáveis que atuam como etiquetas de referência para objetos no Heap (em Python).
+
+---
+
+## Estrutura do Guia e Mapeamento Conceitual
+
+O arquivo está organizado em módulos progressivos que contrastam diretamente as duas linguagens:
+
+1. **Estrutura de um Programa:** Aborda a ausência de boilerplates obrigatórios em Python, a execução do módulo de topo e a convenção de proteção de entrada `if __name__ == "__main__"`.
+2. **Tipos e o Modelo de Objetos:** Compara tipos estáticos da variável versus tipos dinâmicos do objeto, além de demonstrar a precisão arbitrária do tipo `int` em Python e o uso da função `id()` para inspecionar endereços reais de memória.
+3. **Declaração e Atribuição:** Explica a mecânica de vinculação de nomes a objetos no Heap, contrapondo o processo de reserva de espaço em bytes típico da linguagem C.
+
+---
+
+## Instruções de Uso no Python Tutor
+
+Para visualizar e compreender o modelo de execução linha por linha:
+
+1. Acesse o [Python Tutor (Python Compiler)](https://pythontutor.com/python-compiler.html).
+2. Selecione e copie o código do laboratório ou exercício contido no arquivo `python_cheatsheet_vs_c.md`.
+3. Cole o código na área de edição do site.
+4. Clique no botão **"Visualize Execution"**.
+5. Utilize os botões **Next** e **Prev** para avançar passo a passo.
+
+### Pontos Chave para Observação no Simulador
+* **Identidade de Objetos:** Observe como o operador `==` compara os valores internos dos objetos, enquanto o operador `is` verifica se duas etiquetas compartilham exatamente o mesmo endereço no Heap.
+* **Frames e Escopo:** Monitore como o Python Tutor cria e destrói os frames na pilha de chamadas e como as referências mudam de alvo a cada reatribuição.
