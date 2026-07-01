@@ -1,5 +1,37 @@
 import tkinter as tk
+
+# Função que será executada quando o botão for clicado
+def saudar_usuario():
+    nome = entrada.get()  # Pega o texto digitado na caixa de entrada
+    if nome:
+        rotulo_resposta.config(text=f"Olá, {nome}! Seja bem-vindo(a).")
+    else:
+        rotulo_resposta.config(text="Por favor, digite seu nome acima.")
+
+# 1. Cria a janela raiz
 janela = tk.Tk()
-janela.title("Minha Primeira Janela")
-janela.geometry("400x200")
+
+# 2. Configura propriedades
+janela.title("Minha Primeira Janela Interativa")
+janela.geometry("400x250")  # Aumentado levemente para acomodar os novos elementos
+
+# --- NOVOS ELEMENTOS (WIDGETS) ---
+
+# Rótulo de texto descritivo
+rotulo_instrucao = tk.Label(janela, text="Digite seu nome:", font=("Arial", 12))
+rotulo_instrucao.pack(pady=10)  # O pady adiciona um espaçamento vertical
+
+# Caixa de entrada de texto
+entrada = tk.Entry(janela, font=("Arial", 12), width=25)
+entrada.pack(pady=5)
+
+# Botão que chama a função saudar_usuario ao ser clicado
+botao = tk.Button(janela, text="Enviar", command=saudar_usuario, font=("Arial", 10))
+botao.pack(pady=10)
+
+# Rótulo de texto que começará vazio e mostrará a resposta
+rotulo_resposta = tk.Label(janela, text="", font=("Arial", 12, "bold"), fg="blue")
+rotulo_resposta.pack(pady=15)
+
+# 3. Inicia o loop de eventos — SEMPRE no final
 janela.mainloop()
