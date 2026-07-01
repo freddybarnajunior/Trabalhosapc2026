@@ -1,0 +1,61 @@
+import tkinter as tk
+from tkinter import messagebox, filedialog, simpledialog
+
+# Função para exibir caixas de mensagem informativas e de erro
+def mostrar_mensagem(tipo):
+    if tipo == "info":
+        messagebox.showinfo("Sucesso", "A operação foi concluída com êxito!")
+    elif tipo == "erro":
+        messagebox.showerror("Falha do Sistema", "Ocorreu um erro crítico na execução.")
+
+# Função de confirmação de saída (agora vinculada também ao 'X' da janela)
+def confirmar_saida():
+    if messagebox.askyesno("Confirmar Saída", "Deseja realmente fechar o aplicativo?"):
+        janela.destroy()
+
+# Função para seleção de arquivos com validação de cancelamento
+def selecionar_arquivo():
+    caminho = filedialog.askopenfilename(
+        title="Selecionar Arquivo de Texto",
+        filetypes=[("Arquivos de Texto", "*.txt"), ("Todos os Arquivos", "*.*")]
+    )
+    if caminho:
+        resultado.config(text=f"Arquivo: {caminho}", fg="green")
+    else:
+        resultado.config(text="Seleção de arquivo cancelada.", fg="red")
+
+# Função para capturar strings com tratamento de strings vazias
+def capturar_texto():
+    nome = simpledialog.askstring("Entrada de Dados", "Qual é o seu nome completo?")
+    
+    if nome is None:  # Usuário clicou em 'Cancelar'
+        resultado.config(text="Entrada de texto cancelada.", fg="red")
+    elif nome.strip() == "":  # Usuário clicou em 'OK' sem digitar nada
+        resultado.config(text="Nenhum nome foi informado.", fg="orange")
+    else:
+        resultado.config(text=f"Nome registrado: {nome.strip()}", fg="green")
+
+# 1. Configuração da Janela Principal
+janela = tk.Tk()
+janela.title("Gerenciador de Diálogos")
+janela.geometry("360x180")
+
+# Intercepta o clique no botão 'X' do sistema operacional e redireciona para nossa função
+janela.protocol("WM_DELETE_WINDOW", confirmar_saida)
+
+# 2. Painel de Botões (Organizados em Grid para melhor aproveitamento de espaço)
+tk.Button(janela, text="Exibir Info", width=18, command=lambda: mostrar_mensagem("info")).grid(row=0, column=0, padx=10, pady=6)
+tk.Button(janela, text="Exibir Erro", width=18, command=lambda: mostrar_mensagem("erro")).grid(row=0, column=1, padx=10, pady=6)
+tk.Button(janela, text="Abrir Arquivo", width=18, command=selecionar_arquivo).grid(row=1, column=0, padx=10, pady=6)
+tk.Button(janela, text="Solicitar Texto", width=18, command=capturar_texto).grid(row=1, column=1, padx=10, pady=6)
+
+# Botão de saída centralizado na parte inferior
+botao_sair = tk.Button(janela, text="Fechar Aplicativo", width=38, command=confirmar_saida, bg="#f0d0d0")
+botao_sair.grid(row=2, column=0, columnspan=2, pady=10)
+
+# 3. Área de Feedback Visual
+resultado = tk.Label(janela, text="Aguardando interação...", font=("Arial", 10, "italic"), fg="gray")
+resultado.grid(row=3, column=0, columnspan=2, pady=5)
+
+# 4. Início do Loop
+janela.mainloop()
