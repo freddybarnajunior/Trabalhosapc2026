@@ -1,52 +1,61 @@
+# CÉLULA 1: Importações e Configurações
 import pandas as pd
 import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import ttk
 import os
 
-# Configuração para gráficos aparecerem no notebook (opcional)
-%matplotlib inline
+# CÉLULA 2: Função de Carga e Limpeza (Req. 6 e 7)
 def carregar_dados():
     """Lê os arquivos da pasta 'data' e limpa valores sentinela."""
     path_moradores = os.path.join('data', 'moradores.csv')
     path_domicilios = os.path.join('data', 'domicilios.xlsx - Planilha1.csv')
     
-    # Lendo os arquivos
+    # Lendo arquivos com encoding latin1 para evitar erros de acentuação
     df_moradores = pd.read_csv(path_moradores, sep=';', encoding='latin1')
     df_domicilios = pd.read_csv(path_domicilios, sep=';', encoding='latin1')
     
-    # Tratamento de valores sentinela (Req. 6)
-    for col in ['idade_calculada', 'A01npessoas', 'A01ncriancas']:
+    # Tratamento de sentinelas (Req. 6)
+    cols_sentinela = ['idade_calculada', 'A01npessoas', 'A01ncriancas']
+    for col in cols_sentinela:
         if col in df_moradores.columns:
             df_moradores = df_moradores[~df_moradores[col].isin([99999, 88888])]
             
     return df_moradores, df_domicilios
 
-# Carregando
+# Carregamento e Merge (Diferencial D3)
 moradores, domicilios = carregar_dados()
-print(f"Dados carregados: {len(moradores)} moradores e {len(domicilios)} domicílios.")
-# Cruzamento das tabelas
 df_completo = pd.merge(moradores, domicilios, on='A01nficha', how='left')
-df_completo.head()
+print(f"Dados carregados: {len(df_completo)} registros processados.")
+
+# CÉLULA 3: Estatísticas (Req. 4)
 def calcular_estatisticas(df):
-    """Calcula média de pessoas por domicílio (Req. 4)."""
+    """Calcula estatísticas básicas do recorte F."""
     media_pessoas = df['A01npessoas'].mean()
-    total_domicilios = df['A01nficha'].nunique()
+    mediana_idade = df['idade_calculada'].median()
     print(f"Média de pessoas por domicílio: {media_pessoas:.2f}")
-    print(f"Total de domicílios analisados: {total_domicilios}")
+    print(f"Idade mediana dos moradores: {mediana_idade:.0f}")
 
 calcular_estatisticas(df_completo)
+
+# CÉLULA 4: Interface Gráfica (Req. 1, 2 e 5)
 def abrir_interface():
+    """Configura e abre a janela do sistema."""
     janela = tk.Tk()
-    janela.title("Explorador PDAD 2024 - Recorte F")
+    janela.title("Explorador PDAD - Recorte F")
+    janela.geometry("400x300")
     
-    lbl = tk.Label(janela, text="Sistema de Exploração PDAD 2024")
+    lbl = tk.Label(janela, text="Sistema de Exploração PDAD 2024", font=("Arial", 12))
     lbl.pack(pady=20)
     
+    # Exemplo de lista para filtro
+    combo = ttk.Combobox(janela, values=list(df_completo['localidade'].unique()[:10]))
+    combo.pack(pady=10)
+    
     btn_sair = tk.Button(janela, text="Fechar", command=janela.destroy)
-    btn_sair.pack(pady=10)
+    btn_sair.pack(pady=20)
     
     janela.mainloop()
 
-# Para testar a interface:
+# Para abrir, descomente a linha abaixo:
 # abrir_interface()
