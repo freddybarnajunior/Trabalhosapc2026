@@ -1,18 +1,24 @@
-# Explorador de Microdados PDAD 2024 (Recorte F)
+# PDAD 2024 - Analisador do Bloco F (Saúde)
 
-Este projeto é um sistema de exploração de dados para a Pesquisa Distrital por Amostra de Domicílios (PDAD 2024), desenvolvido para a disciplina de Algoritmos e Programação de Computadores (APC 2026/1). O foco deste trabalho é a análise do **Recorte F: Perfil Demográfico e Composição Domiciliar**.
+Este projeto é uma aplicação de análise de dados desenvolvida como Trabalho Final da disciplina **APC (Algoritmos e Programação de Computadores) 2026/1**. O sistema foca no **Bloco F** da PDAD 2024, permitindo a exploração visual de indicadores de saúde dos moradores do Distrito Federal.
 
 ## Funcionalidades
-- **Integração de Bases:** Utiliza `pd.merge` para cruzar dados de moradores e domicílios.
-- **Tratamento de Sentinelas:** Limpeza rigorosa de valores (`99999`, `88888`) para garantir a integridade das análises.
-- **Estatísticas:** Geração automática de indicadores de arranjo familiar e demografia.
-- **Interface Gráfica:** Utiliza `tkinter` para exploração interativa dos dados.
+- **Interface Gráfica (GUI):** Construída com `tkinter` para interação amigável.
+- **Análise Estatística:** Módulo para processamento e filtragem de variáveis do Bloco F.
+- **Visualização de Dados:** Gráficos gerados dinamicamente via `matplotlib`.
+- **Limpeza de Dados:** Tratamento automático de valores sentinela (códigos `99999` e `88888`) para maior precisão.
 
-## Requisitos de Execução
-- Python 3.x
-- Bibliotecas: `pandas`, `matplotlib`, `openpyxl`, `tkinter` (incluída na instalação padrão do Python).
+## Tecnologias Utilizadas
+- **Linguagem:** Python 3.x
+- **Bibliotecas:**
+  - `pandas` (Manipulação de dados)
+  - `matplotlib` (Geração de gráficos)
+  - `tkinter` (Interface Gráfica)
 
-## Como utilizar
-1. Mantenha os arquivos `moradores.csv` e `domicilios.xlsx - Planilha1.csv` dentro de uma pasta chamada `data/`.
-2. Execute todas as células do notebook sequencialmente.
-3. Para abrir a interface gráfica, chame a função `abrir_interface()` na última célula.
+## Como Executar
+
+### 1. Pré-requisitos
+Certifique-se de ter o Python instalado. Clone este repositório e instale as dependências:
+
+```bash
+pip install pandas matplotlib
