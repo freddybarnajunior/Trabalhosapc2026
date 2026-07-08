@@ -1,1 +1,15 @@
+# PDAD Explorer — Recorte F: Perfil Demográfico e Composição Domiciliar
 
+Este sistema foi desenvolvido como trabalho final da disciplina de Algoritmos e Programação de Computadores (APC) 2026/1. O objetivo é permitir a exploração interativa dos microdados do PDAD 2024 (DF), focando na composição etária e arranjos domiciliares.
+
+## Funcionalidades
+- **Integração de dados:** Utiliza `pd.merge` para cruzar a base de moradores com a de domicílios.
+- **Análise Estatística:** Cálculo automático de médias demográficas.
+- **Interface Gráfica:** Sistema construído com `tkinter` para exploração sem necessidade de editar o código.
+- **Limpeza de Dados:** Tratamento rigoroso de valores sentinela (99999 e 88888).
+
+## Como executar
+1. Certifique-se de ter o Python instalado.
+2. Instale as dependências:
+   ```bash
+   pip install pandas matplotlib openpyxl
