@@ -1,1 +1,52 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import tkinter as tk
+from tkinter import ttk
+import os
 
+# Configuração para gráficos aparecerem no notebook (opcional)
+%matplotlib inline
+def carregar_dados():
+    """Lê os arquivos da pasta 'data' e limpa valores sentinela."""
+    path_moradores = os.path.join('data', 'moradores.csv')
+    path_domicilios = os.path.join('data', 'domicilios.xlsx - Planilha1.csv')
+    
+    # Lendo os arquivos
+    df_moradores = pd.read_csv(path_moradores, sep=';', encoding='latin1')
+    df_domicilios = pd.read_csv(path_domicilios, sep=';', encoding='latin1')
+    
+    # Tratamento de valores sentinela (Req. 6)
+    for col in ['idade_calculada', 'A01npessoas', 'A01ncriancas']:
+        if col in df_moradores.columns:
+            df_moradores = df_moradores[~df_moradores[col].isin([99999, 88888])]
+            
+    return df_moradores, df_domicilios
+
+# Carregando
+moradores, domicilios = carregar_dados()
+print(f"Dados carregados: {len(moradores)} moradores e {len(domicilios)} domicílios.")
+# Cruzamento das tabelas
+df_completo = pd.merge(moradores, domicilios, on='A01nficha', how='left')
+df_completo.head()
+def calcular_estatisticas(df):
+    """Calcula média de pessoas por domicílio (Req. 4)."""
+    media_pessoas = df['A01npessoas'].mean()
+    total_domicilios = df['A01nficha'].nunique()
+    print(f"Média de pessoas por domicílio: {media_pessoas:.2f}")
+    print(f"Total de domicílios analisados: {total_domicilios}")
+
+calcular_estatisticas(df_completo)
+def abrir_interface():
+    janela = tk.Tk()
+    janela.title("Explorador PDAD 2024 - Recorte F")
+    
+    lbl = tk.Label(janela, text="Sistema de Exploração PDAD 2024")
+    lbl.pack(pady=20)
+    
+    btn_sair = tk.Button(janela, text="Fechar", command=janela.destroy)
+    btn_sair.pack(pady=10)
+    
+    janela.mainloop()
+
+# Para testar a interface:
+# abrir_interface()
