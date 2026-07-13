@@ -1,9 +1,11 @@
+import pandas as pd
+
 def carregar_dados():
     """Lê os arquivos PDAD, filtra sentinelas e realiza o merge."""
     moradores = pd.read_csv('moradores.csv', sep=';')
     domicilios = pd.read_excel('domicilios.xlsx')
     
-    # Filtragem de valores sentinela (99999 e 88888)
+    # Filtragem de valores sentinela
     moradores = moradores[(moradores['escolaridade'] != 99999) & (moradores['escolaridade'] != 88888)]
     
     # Merge das tabelas
