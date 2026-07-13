@@ -1,24 +1,19 @@
-# PDAD 2024 - Analisador do Bloco F (Saúde)
+# Explorador PDAD 2024 — Frederico Ribeiro Barnabe Júnior
 
-Este projeto é uma aplicação de análise de dados desenvolvida como Trabalho Final da disciplina **APC (Algoritmos e Programação de Computadores) 2026/1**. O sistema foca no **Bloco F** da PDAD 2024, permitindo a exploração visual de indicadores de saúde dos moradores do Distrito Federal.
+Este sistema é uma aplicação desenvolvida para a disciplina de **Algoritmos e Programação de Computadores (APC 2026/1)**. O programa permite a exploração interativa dos microdados da Pesquisa Distrital por Amostra de Domicílios (PDAD 2024) do Distrito Federal, focando no recorte de **Perfil educacional e renda por Região Administrativa (RA)**.
+
+O software realiza o cruzamento (merge) entre os dados de moradores e domicílios, possibilitando a visualização de médias de escolaridade e renda por localidade através de uma interface gráfica intuitiva.
 
 ## Funcionalidades
-- **Interface Gráfica (GUI):** Construída com `tkinter` para interação amigável.
-- **Análise Estatística:** Módulo para processamento e filtragem de variáveis do Bloco F.
-- **Visualização de Dados:** Gráficos gerados dinamicamente via `matplotlib`.
-- **Limpeza de Dados:** Tratamento automático de valores sentinela (códigos `99999` e `88888`) para maior precisão.
 
-## Tecnologias Utilizadas
-- **Linguagem:** Python 3.x
-- **Bibliotecas:**
-  - `pandas` (Manipulação de dados)
-  - `matplotlib` (Geração de gráficos)
-  - `tkinter` (Interface Gráfica)
+- **Visualização Gráfica:** Gráficos de barras embutidos comparando a média de escolaridade e renda domiciliar entre as RAs do DF.
+- **Análise Estatística:** Cálculo automático de médias e totais baseados nos microdados.
+- **Exportação de Relatórios:** Possibilidade de salvar um relatório detalhado com os indicadores calculados em um arquivo `.txt`.
+- **Tratamento de Dados:** Filtro rigoroso de valores sentinela (`99999` e `88888`) para garantir a integridade das análises.
 
-## Como Executar
+## Pré-requisitos
 
-### 1. Pré-requisitos
-Certifique-se de ter o Python instalado. Clone este repositório e instale as dependências:
+Para executar o sistema, você precisará ter o **Python 3.x** instalado. As bibliotecas necessárias estão listadas abaixo:
 
 ```bash
-pip install pandas matplotlib
+pip install pandas matplotlib openpyxl
