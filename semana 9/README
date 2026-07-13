@@ -1,19 +1,20 @@
-# Explorador PDAD 2024 — Frederico Ribeiro Barnabe Júnior
+# Explorador PDAD 2024 — Sistema de Análise Social do DF
 
-Este sistema é uma aplicação desenvolvida para a disciplina de **Algoritmos e Programação de Computadores (APC 2026/1)**. O programa permite a exploração interativa dos microdados da Pesquisa Distrital por Amostra de Domicílios (PDAD 2024) do Distrito Federal, focando no recorte de **Perfil educacional e renda por Região Administrativa (RA)**.
+Este sistema foi desenvolvido como trabalho final para a disciplina de **Algoritmos e Programação de Computadores (APC 2026/1)**. O objetivo é permitir a exploração interativa dos microdados da Pesquisa Distrital por Amostra de Domicílios (PDAD 2024), com foco no recorte de **Perfil educacional e renda por Região Administrativa (RA)**.
 
-O software realiza o cruzamento (merge) entre os dados de moradores e domicílios, possibilitando a visualização de médias de escolaridade e renda por localidade através de uma interface gráfica intuitiva.
+O software cruza informações de moradores e domicílios para gerar indicadores sociais, visualizações gráficas e relatórios personalizados.
 
 ## Funcionalidades
 
-- **Visualização Gráfica:** Gráficos de barras embutidos comparando a média de escolaridade e renda domiciliar entre as RAs do DF.
-- **Análise Estatística:** Cálculo automático de médias e totais baseados nos microdados.
-- **Exportação de Relatórios:** Possibilidade de salvar um relatório detalhado com os indicadores calculados em um arquivo `.txt`.
-- **Tratamento de Dados:** Filtro rigoroso de valores sentinela (`99999` e `88888`) para garantir a integridade das análises.
+*   **Interface Gráfica (Tkinter):** Sistema desktop intuitivo para navegação nos dados.
+*   **Visualização Dinâmica:** Gráficos de barras (Matplotlib) comparando escolaridade e renda média entre as RAs.
+*   **Relatórios Exportáveis:** Gera arquivos de texto (.txt) com estatísticas detalhadas calculadas a partir dos dados.
+*   **Tratamento de Dados:** Filtro rigoroso de valores sentinela (99999 e 88888) conforme orientações da PDAD 2024.
+*   **Código Modular:** Estrutura organizada em funções e módulos (utils) para facilitar a manutenção.
 
 ## Pré-requisitos
 
-Para executar o sistema, você precisará ter o **Python 3.x** instalado. As bibliotecas necessárias estão listadas abaixo:
+Para executar este sistema, você precisa do Python 3 instalado e das seguintes bibliotecas:
 
 ```bash
 pip install pandas matplotlib openpyxl
